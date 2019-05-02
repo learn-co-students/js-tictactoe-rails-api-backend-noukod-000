@@ -7,7 +7,7 @@ RSpec.describe GamesController, :type => :controller do
 
   describe "#create" do
     it "can create a new Game instance" do
-      post :create, {
+      post :create, params: {
         :state => ["X", "", "", "", "", "", "", "", ""]
       }
 
@@ -15,7 +15,7 @@ RSpec.describe GamesController, :type => :controller do
     end
 
     it "properly serializes the 'state' attribute as an array instead of as a string" do
-      post :create, {
+      post :create, params: {
         :state => ["X", "", "", "", "", "", "", "", ""]
       }
 
@@ -52,7 +52,7 @@ RSpec.describe GamesController, :type => :controller do
     it "persists changes to a previously-saved game's state (as players make additional moves)" do
       game = Game.create(:state => ["X", "", "", "", "", "", "", "", ""])
 
-      patch :update, {
+      patch :update, params: {
         :id => game.id,
         :state => ["X", "O", "", "", "", "", "", "", ""]
       }
